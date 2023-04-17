@@ -8,10 +8,11 @@ import {
   faShareNodes,
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
+import { createPinia } from "pinia";
 import "./assets/main.css";
-
 const app = createApp(App);
-
+const pinia = createPinia();
+app.use(pinia);
 app.use(router);
 library.add(faStar, faShareNodes, faMagnifyingGlass);
 app.component("font-awesome-icon", FontAwesomeIcon).mount("#app");

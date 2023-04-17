@@ -1,9 +1,18 @@
 <template lang="">
-  <blockquote :class="getColor" class="flex flex-col gap-2">
+  <blockquote :class="getColor" class="flex flex-col gap-2 w-full">
     <q>
-      {{ qoute }}
+      {{ getContent || "" }}
     </q>
-    <cite class="font-bold text-lg">--- {{ author }}</cite>
+    <div class="flex justify-between items-center pr-3">
+      <cite class="font-bold text-lg">--- {{ getAuthor || "" }}</cite>
+    </div>
+    <div class="flex items-center gap-1 my-3">
+      <span
+        v-for="tag in getTags"
+        class="bg-teal-700 text-sm p-1 px-3 w-max rounded-sm text-white"
+        >{{ tag }}</span
+      >
+    </div>
   </blockquote>
   <div
     v-if="!isHeader"
@@ -28,11 +37,7 @@ import { computed, ref } from "vue";
 const favouriteState = ref(false);
 const props = defineProps({
   qoute: {
-    type: String,
-    required: true,
-  },
-  author: {
-    type: String,
+    type: Object,
     required: true,
   },
   isHeader: {
@@ -43,9 +48,25 @@ const props = defineProps({
   isFavourite: {
     type: Boolean,
     default: false,
-    required: true,
+    required: false,
+  },
+  author: {
+    type: String,
+    required: false,
   },
 });
+
+const getContent = computed(() => {
+  return props.qoute?.content;
+});
+const getAuthor = computed(() => {
+  return props.qoute?.author;
+});
+
+const getTags = computed(() => {
+  return props.qoute?.tags;
+});
+
 const getColor = computed(() =>
   props.isHeader ? "text-white" : "text-gray-900"
 );
