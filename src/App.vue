@@ -13,9 +13,9 @@ import { RouterLink, RouterView } from "vue-router";
         />
       </RouterLink>
     </div>
-    <nav class="flex items-center gap-3">
+    <nav class="flex items-center gap-3 text-white">
       <RouterLink class="p-2" to="/">Home</RouterLink>
-      <RouterLink class="p-2" to="/favourites">Favourites</RouterLink>
+      <RouterLink class="p-2" to="/categories">Categories</RouterLink>
     </nav>
   </header>
 

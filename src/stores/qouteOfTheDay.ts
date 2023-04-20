@@ -9,10 +9,19 @@ export const useQouteOfTheDayStore = defineStore({
   actions: {
     async getQoute() {
       try {
-        const quotes = await axios
-          .get(`${base_url}/quotes/random`)
-          .then((res) => (this.qoute = res.data));
-        return (this.qoute = quotes);
+        const quotes = await axios.get(
+          `${base_url}/quotes/random/?tags=inspirational`
+        );
+        const author_slug = quotes.data[0].authorSlug;
+        const author_link = (
+          await axios.get(`${base_url}/authors/?slug=${author_slug}`)
+        ).data?.results[0]?.link;
+        const quote = {
+          ...quotes.data[0],
+          author_link,
+        };
+
+        return (this.qoute = quote);
       } catch (error) {
         return error;
       }

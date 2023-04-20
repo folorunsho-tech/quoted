@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import FavouritesView from "../views/FavouritesView.vue";
 import SearchView from "../views/SearchView.vue";
+import QuoteView from "../views/QuoteView.vue";
+import CategoriesView from "../views/CategoriesView.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -11,9 +12,15 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: "/favourites",
-      name: "Favourites",
-      component: FavouritesView,
+      path: "/categories",
+      name: "Categories",
+      component: CategoriesView,
+    },
+    {
+      path: "/q/:quote",
+      alias: "/quote/:quote",
+      name: "Quote",
+      component: QuoteView,
     },
     {
       path: "/search",
